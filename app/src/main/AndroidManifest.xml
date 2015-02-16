@@ -19,7 +19,7 @@
         <activity
             android:name=".AddGroupConversation"
             android:label="@string/title_activity_add_group_conversation"
-            android:parentActivityName=".Main"
+            android:parentActivityName=".MainActivity"
             android:theme="@style/Theme.AppCompat.Light" >
         </activity>
         <activity
@@ -31,7 +31,7 @@
         <activity
             android:name=".EditProfileActivity"
             android:label="@string/edit_profile"
-            android:parentActivityName=".Main"
+            android:parentActivityName=".MainActivity"
             android:theme="@style/Theme.AppCompat.Light" >
         </activity>
 

@@ -1,89 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent"
-    android:id="@+id/">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <TextView
+        android:id="@+id/editProfileTitleTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Edit Profile"
-        android:id="@+id/editProfileTitleTv"
-        android:textSize="40dp"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:text="Edit Profile"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="40dp" />
 
     <ImageView
+        android:id="@+id/userImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/userImage"
-        android:src="@drawable/anonymous_user"
-        android:layout_below="@+id/editProfileTitleTv"
-        android:layout_alignRight="@+id/editProfileTitleTv"
         android:layout_alignEnd="@+id/editProfileTitleTv"
-        android:layout_marginTop="25dp" />
+        android:layout_alignRight="@+id/editProfileTitleTv"
+        android:layout_below="@+id/editProfileTitleTv"
+        android:layout_marginTop="25dp"
+        android:src="@drawable/anonymous_user" />
 
     <Button
+        android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Change Picture"
-        android:id="@+id/button2"
         android:layout_below="@+id/userImage"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="24dp" />
+        android:layout_marginTop="24dp"
+        android:text="Change Picture" />
 
     <TextView
+        android:id="@+id/nameTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Name: Anton"
-        android:id="@+id/nameTv"
         android:layout_below="@+id/button2"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="27dp" />
+        android:layout_marginTop="27dp"
+        android:text="Name: Anton"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <TextView
+        android:id="@+id/ageTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Age: 23"
-        android:id="@+id/ageTv"
         android:layout_below="@+id/nameTv"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="25dp" />
+        android:layout_marginTop="25dp"
+        android:text="Age: 23"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
+        android:id="@+id/countryTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Country: Sweden"
-        android:id="@+id/countryTv"
         android:layout_below="@+id/ageTv"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="27dp" />
+        android:layout_marginTop="27dp"
+        android:text="Country: Sweden"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <TextView
+        android:id="@+id/sleepTimeTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Sleeping Time: 12:00 - 8:00"
-        android:id="@+id/sleepTimeTv"
         android:layout_below="@+id/countryTv"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:text="Sleeping Time: 12:00 - 8:00"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <Button
+        android:id="@+id/button4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Save Changes"
-        android:id="@+id/button4"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" /><![CDATA[
-
-
-
-    >
-
-
-
-]]>
+        android:layout_centerHorizontal="true"
+        android:text="Save Changes" />
 </RelativeLayout>

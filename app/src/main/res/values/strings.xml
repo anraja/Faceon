@@ -1,8 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Faceon</string>
+    <string name="app_name">Selfie Challenge</string>
     <string name="hello_world">Hello world!</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
     <string name="action_settings">Settings</string>
+    <string name="action_addGroup">Add Group</string>
+    <string name="title_activity_add_group_conversation">Add Group</string>
+    <string name="title_activity_add_friends">AddFriends</string>
+    <string name="addGroupParticipants">Add Group Participants</string>
+    <string name="title_activity_select_friends">SelectFriends</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="edit_profile">Edit Profile</string>
 
 </resources>
