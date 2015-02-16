@@ -43,6 +43,10 @@
             android:parentActivityName=".AddFriends"
             android:theme="@style/Theme.AppCompat.Light" >
         </activity>
+        <activity
+            android:name=".Win"
+            android:label="@string/title_activity_win" >
+        </activity>
     </application>
 
 </manifest>
