@@ -38,8 +38,8 @@ public class MainActivity extends ListActivity {
     }
     private ArrayList<Map<String, String>> buildData() {
         ArrayList<Map<String, String>> list = new ArrayList<Map<String, String>>();
-        list.add(putData("Group A", "Anton, Anitha, Karthnik"));
-        list.add(putData("Group B", "Nora, Daniel, Karthnik"));
+        list.add(putData("Group A", "Anton, Anitha, Karthik"));
+        list.add(putData("Group B", "Nora, Daniel, Karthik"));
         list.add(putData("Group N", "Anitha, Daniel, Anton"));
         return list;
     }
