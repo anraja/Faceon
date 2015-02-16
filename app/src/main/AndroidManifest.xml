@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.anitha.faceon" >
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".AddGroupConversation"
+            android:label="@string/title_activity_add_group_conversation"
+            android:parentActivityName=".Main"
+            android:theme="@style/Theme.AppCompat.Light" >
+        </activity>
+        <activity
+            android:name=".AddFriends"
+            android:label="@string/title_activity_add_friends"
+            android:parentActivityName=".AddGroupConversation"
+            android:theme="@style/Theme.AppCompat.Light" >
+        </activity>
+        <activity
+            android:name=".EditProfileActivity"
+            android:label="@string/edit_profile"
+            android:parentActivityName=".Main"
+            android:theme="@style/Theme.AppCompat.Light" >
+        </activity>
+
+        <uses-permission android:name="android.permission.READ_CONTACTS" />
+
+        <activity
+            android:name=".SelectFriends"
+            android:label="@string/title_activity_select_friends"
+            android:parentActivityName=".AddFriends"
+            android:theme="@style/Theme.AppCompat.Light" >
+        </activity>
+    </application>
+
+</manifest>

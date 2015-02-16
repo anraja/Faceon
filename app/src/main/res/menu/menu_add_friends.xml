@@ -1,0 +1,23 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.nora.selfiechallenge.AddFriends">
+    <item
+        android:id="@+id/action_settings"
+        android:orderInCategory="100"
+        android:title="@string/action_settings"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_addFriends"
+        android:orderInCategory="100"
+        android:icon="@drawable/ic_action_accept"
+        android:title="@string/ok"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/action_cancelAddingFriends"
+        android:orderInCategory="100"
+        android:icon="@drawable/ic_action_cancel"
+        android:title="@string/cancel"
+        app:showAsAction="always" />
+
+</menu>
