@@ -18,9 +18,9 @@ public class Win extends ActionBarActivity {
         Button button = (Button) findViewById(R.id.win_button);
 
         button.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Log.d("Win","Clicked to send selfie");
-            }
+              public void onClick(View v) {
+                   Log.d("Win","Clicked to send selfie");
+              }
         });
     }
 
