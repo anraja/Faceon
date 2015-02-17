@@ -3,8 +3,9 @@
 
     <string name="app_name">Selfie Challenge</string>
     <string name="win_con">Congratulations!</string>
-    <string name="win">You've Won!</string>
-    <string name="smear">Smear it in their faces by sending your\n Victory selfie!</string>
+    <string name="win">You have Won!</string>
+    <string name="hello_world">Hello World!</string>
+    <string name="smear">Smear it in their faces by sending\n your Victory selfie!</string>
     <string name="win_button">In your face!</string>
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
