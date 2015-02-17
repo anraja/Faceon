@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
+    
     <string name="app_name">Selfie Challenge</string>
     <string name="hello_world">Hello world!</string>
     <string name="win_con">Congratulations!</string>
@@ -18,5 +18,6 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="edit_profile">Edit Profile</string>
     <string name="title_activity_win">Win</string>
-
+    <string name="title_activity_invitation">InvitationActivity</string>
+    
 </resources>
