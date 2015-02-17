@@ -103,7 +103,7 @@ public class MainActivity extends ListActivity {
         return super.onOptionsItemSelected(item);
     }
     public void editProfile (View view){
-        Intent  editProfileIntent = new Intent(this, EditProfileActivity.class);
+        Intent  editProfileIntent = new Intent(this, contacts.class);
         startActivity(editProfileIntent);
     }
     public void triggerNotification (View view){
