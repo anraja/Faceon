@@ -50,7 +50,7 @@
             android:label="@string/title_activity_win" >
         </activity>
         <activity
-            android:name=".loose"
+            android:name=".Loose"
             android:label="@string/title_activity_loose" >
         </activity>
     </application>
