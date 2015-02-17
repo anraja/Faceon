@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.anitha.faceon" >
+
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.CAMERA" />
+
     <uses-feature android:name="android.hardware.camera" />
 
     <application
@@ -37,9 +39,6 @@
             android:parentActivityName=".MainActivity"
             android:theme="@style/Theme.AppCompat.Light" >
         </activity>
-
-
-
         <activity
             android:name=".SelectFriends"
             android:label="@string/title_activity_select_friends"
@@ -49,6 +48,10 @@
         <activity
             android:name=".Win"
             android:label="@string/title_activity_win" >
+        </activity>
+        <activity
+            android:name=".loose"
+            android:label="@string/title_activity_loose" >
         </activity>
     </application>
 
