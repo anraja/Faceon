@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.anitha.faceon" >
-
+    
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -12,7 +12,7 @@
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
+                
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -34,9 +34,9 @@
             android:parentActivityName=".MainActivity"
             android:theme="@style/Theme.AppCompat.Light" >
         </activity>
-
+        
         <uses-permission android:name="android.permission.READ_CONTACTS" />
-
+        
         <activity
             android:name=".SelectFriends"
             android:label="@string/title_activity_select_friends"
@@ -47,6 +47,14 @@
             android:name=".Win"
             android:label="@string/title_activity_win" >
         </activity>
+        <activity
+            android:name=".InvitationActivity"
+            android:label="@string/title_activity_invitation" >
+        </activity>
+        <activity
+            android:name=".ChallengeProgressActivity"
+            android:label="@string/title_activity_challenge_progress" >
+        </activity>
     </application>
-
+    
 </manifest>
