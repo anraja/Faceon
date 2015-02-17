@@ -27,6 +27,7 @@ public class MainActivity extends ListActivity {
     // Gets an instance of the NotificationManager service
     NotificationManager mNotifyMgr;
     NotificationCompat.Builder mBuilder;
+    List<Map<String, String>> list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +40,7 @@ public class MainActivity extends ListActivity {
         ListView listview = (ListView) findViewById(android.R.id.list);
         String[] values = new String[] { "KTH group", "Tennis group" , "Amazing group","Group B"};
 
-        List<Map<String, String>> list = buildData();
+        list = buildData();
         String[] from = { "name", "friends" };
         int[] to = { android.R.id.text1, android.R.id.text2 };
         SimpleAdapter adapter = new SimpleAdapter(this, list,
@@ -62,7 +63,6 @@ public class MainActivity extends ListActivity {
                         PendingIntent.FLAG_UPDATE_CURRENT
                 );
         mBuilder.setContentIntent(resultPendingIntent);
-
     }
     private List<Map<String, String>> buildData() {
         List<Map<String, String>> list = new ArrayList<Map<String, String>>();
@@ -109,7 +109,10 @@ public class MainActivity extends ListActivity {
     }
 
     public void editGroups (View view){
+
         Intent editGroupsIntent = new Intent(this,EditGroupsActivity.class);
+
+
         startActivity(editGroupsIntent);
     }
 
