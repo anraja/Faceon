@@ -23,6 +23,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginBottom="84dp"
+        android:onClick="editGroups"
         android:text="Edit Groups" />
 
     <Button
@@ -41,6 +42,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
+        android:onClick="win"
         android:text="Quit" />
     <Button android:id="@+id/notify"
         android:layout_width="wrap_content"

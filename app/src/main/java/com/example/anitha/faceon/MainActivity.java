@@ -15,6 +15,7 @@ import android.widget.SimpleAdapter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -38,7 +39,7 @@ public class MainActivity extends ListActivity {
         ListView listview = (ListView) findViewById(android.R.id.list);
         String[] values = new String[] { "KTH group", "Tennis group" , "Amazing group","Group B"};
 
-        ArrayList<Map<String, String>> list = buildData();
+        List<Map<String, String>> list = buildData();
         String[] from = { "name", "friends" };
         int[] to = { android.R.id.text1, android.R.id.text2 };
         SimpleAdapter adapter = new SimpleAdapter(this, list,
@@ -63,16 +64,16 @@ public class MainActivity extends ListActivity {
         mBuilder.setContentIntent(resultPendingIntent);
 
     }
-    private ArrayList<Map<String, String>> buildData() {
-        ArrayList<Map<String, String>> list = new ArrayList<Map<String, String>>();
+    private List<Map<String, String>> buildData() {
+        List<Map<String, String>> list = new ArrayList<Map<String, String>>();
         list.add(putData("Group A", "Anton, Anitha, Karthik"));
         list.add(putData("Group B", "Nora, Daniel, Karthik"));
         list.add(putData("Group N", "Anitha, Daniel, Anton"));
         return list;
     }
 
-    private HashMap<String, String> putData(String name, String purpose) {
-        HashMap<String, String> item = new HashMap<String, String>();
+    private Map<String, String> putData(String name, String purpose) {
+        Map<String, String> item = new HashMap<String, String>();
         item.put("name", name);
         item.put("friends", purpose);
         return item;
@@ -106,6 +107,17 @@ public class MainActivity extends ListActivity {
         Intent  editProfileIntent = new Intent(this, EditProfileActivity.class);
         startActivity(editProfileIntent);
     }
+
+    public void editGroups (View view){
+        Intent editGroupsIntent = new Intent(this,EditGroupsActivity.class);
+        startActivity(editGroupsIntent);
+    }
+
+    public void win (View view){
+        Intent winIntent = new Intent(this,Win.class);
+        startActivity(winIntent);
+    }
+
     public void triggerNotification (View view){
         mNotifyMgr.notify(mNotificationId, mBuilder.build());
     }

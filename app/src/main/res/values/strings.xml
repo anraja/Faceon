@@ -2,15 +2,14 @@
 <resources>
 
     <string name="app_name">Selfie Challenge</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="win_con">Congratulations!</string>
+    <string name="win_con">Congratulations!</string>s
+    <string name="win">You\'ve Won!</string>
     <string name="alas">Alas!\n You were to late.</string>
     <string name="loose">You were eliminated.</string>
     <string name="back_button">Back</string>
     <string name="Challenge">You recived a Challenge!</string>
     <string name="selfie_button">Take a selfie</string>
     <string name="keep">You can still follow\n the group challange</string>
-    <string name="win">You have Won!</string>
     <string name="hello_world">Hello World!</string>
     <string name="smear">Smear it in their faces by sending\n your Victory selfie!</string>
     <string name="win_button">In your face!</string>
@@ -24,6 +23,7 @@
     <string name="title_activity_select_friends">SelectFriends</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="edit_profile">Edit Profile</string>
+    <string name="edit_groups">Edit Groups</string>
     <string name="title_activity_win">Win</string>
     <string name="title_activity_loose">loose</string>
     <string name="title_activity_notification">Notification</string>
