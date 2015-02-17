@@ -1,8 +1,11 @@
 package com.example.anitha.faceon;
 
 import android.app.ListActivity;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.NotificationCompat;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,12 +22,19 @@ import java.util.Map;
 public class MainActivity extends ListActivity {
 
     private ArrayAdapter<String> listAdapter;
+    // Sets an ID for the notification
+    int mNotificationId = 001;
+    // Gets an instance of the NotificationManager service
+    NotificationManager mNotifyMgr;
+    NotificationCompat.Builder mBuilder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getActionBar();
+        mNotifyMgr =
+                (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 
         ListView listview = (ListView) findViewById(android.R.id.list);
         String[] values = new String[] { "KTH group", "Tennis group" , "Amazing group","Group B"};
@@ -35,7 +45,24 @@ public class MainActivity extends ListActivity {
         SimpleAdapter adapter = new SimpleAdapter(this, list,
                 android.R.layout.simple_list_item_2, from, to);
         setListAdapter(adapter);
-      
+        mBuilder =
+                new NotificationCompat.Builder(this)
+                        .setSmallIcon(R.drawable.ic_notification)
+                        .setContentTitle("Selfie Challenge")
+                        .setContentText("From group A");
+
+        Intent resultIntent = new Intent(this, Notification.class);
+// Because clicking the notification opens a new ("special") activity, there's
+// no need to create an artificial back stack.
+        PendingIntent resultPendingIntent =
+                PendingIntent.getActivity(
+                        this,
+                        0,
+                        resultIntent,
+                        PendingIntent.FLAG_UPDATE_CURRENT
+                );
+        mBuilder.setContentIntent(resultPendingIntent);
+
     }
     private List<Map<String, String>> buildData() {
         List<Map<String, String>> list = new ArrayList<Map<String, String>>();
@@ -91,4 +118,7 @@ public class MainActivity extends ListActivity {
         startActivity(winIntent);
     }
 
+    public void triggerNotification (View view){
+        mNotifyMgr.notify(mNotificationId, mBuilder.build());
+    }
 }
