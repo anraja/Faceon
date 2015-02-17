@@ -47,6 +47,11 @@
             android:name=".Win"
             android:label="@string/title_activity_win" >
         </activity>
+
+        <activity android:name=".EditGroupsActivity" android:label="Edit Groups"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/Theme.AppCompat.Light" >
+         </activity>
     </application>
 
 </manifest>
