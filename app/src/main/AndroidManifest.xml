@@ -14,7 +14,8 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:theme="@style/Theme.AppCompat.Light">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -61,6 +62,10 @@
         <activity
             android:name=".Notification"
             android:label="@string/title_activity_notification" >
+        </activity>
+        <activity
+            android:name=".contacts"
+            android:label="@string/title_activity_contacts" >
         </activity>
     </application>
 

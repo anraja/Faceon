@@ -7,11 +7,30 @@
         android:orderInCategory="100"
         android:title="@string/action_settings"
         app:showAsAction="never" />
+
     <item
         android:id="@+id/action_addGroup"
         android:icon="@drawable/ic_action_add_group"
         android:title="@string/action_addGroup"
+        app:showAsAction="ifRoom"
+
+        />
+
+    <item
+        android:id="@+id/action_group"
+        android:icon="@drawable/ic_action_group"
+        android:title="@string/action_group"
         app:showAsAction="always"
 
         />
+
+    <item
+        android:id="@+id/social_person"
+        android:icon="@drawable/ic_action_person"
+        android:title="@string/action_person"
+        app:showAsAction="ifRoom"
+
+        />
+
+
 </menu>

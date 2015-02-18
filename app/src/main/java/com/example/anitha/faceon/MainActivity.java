@@ -1,11 +1,14 @@
 package com.example.anitha.faceon;
 
+import android.app.Activity;
+import android.app.FragmentManager;
 import android.app.ListActivity;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,9 +22,11 @@ import java.util.List;
 import java.util.Map;
 
 
-public class MainActivity extends ListActivity {
+public class MainActivity extends ActionBarActivity {
 
     private ArrayAdapter<String> listAdapter;
+
+
     // Sets an ID for the notification
     int mNotificationId = 001;
     // Gets an instance of the NotificationManager service
@@ -34,18 +39,18 @@ public class MainActivity extends ListActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getActionBar();
+
+        FragmentManager fm = getFragmentManager();
+
+
+        if (fm.findFragmentById(android.R.id.content) == null) {
+            GroupListFragment list = new GroupListFragment();
+            fm.beginTransaction().add(android.R.id.content, list).commit();
+        }
         mNotifyMgr =
                 (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 
-        ListView listview = (ListView) findViewById(android.R.id.list);
-        String[] values = new String[] { "KTH group", "Tennis group" , "Amazing group","Group B"};
 
-        list = buildData();
-        String[] from = { "name", "friends" };
-        int[] to = { android.R.id.text1, android.R.id.text2 };
-        SimpleAdapter adapter = new SimpleAdapter(this, list,
-                android.R.layout.simple_list_item_2, from, to);
-        setListAdapter(adapter);
         mBuilder =
                 new NotificationCompat.Builder(this)
                         .setSmallIcon(R.drawable.ic_notification)
@@ -63,20 +68,6 @@ public class MainActivity extends ListActivity {
                         PendingIntent.FLAG_UPDATE_CURRENT
                 );
         mBuilder.setContentIntent(resultPendingIntent);
-    }
-    private List<Map<String, String>> buildData() {
-        List<Map<String, String>> list = new ArrayList<Map<String, String>>();
-        list.add(putData("Group A", "Anton, Anitha, Karthik"));
-        list.add(putData("Group B", "Nora, Daniel, Karthik"));
-        list.add(putData("Group N", "Anitha, Daniel, Anton"));
-        return list;
-    }
-
-    private Map<String, String> putData(String name, String purpose) {
-        Map<String, String> item = new HashMap<String, String>();
-        item.put("name", name);
-        item.put("friends", purpose);
-        return item;
     }
 
 
@@ -99,6 +90,10 @@ public class MainActivity extends ListActivity {
             return true;
         }else if (id == R.id.action_addGroup){
             startActivity(new Intent(this,AddGroupConversation.class));
+        }else if (id == R.id.social_person){
+            startActivity(new Intent(this,EditProfileActivity.class));
+        }else if (id == R.id.action_group){
+            startActivity(new Intent(this,contacts.class));
         }
 
         return super.onOptionsItemSelected(item);
