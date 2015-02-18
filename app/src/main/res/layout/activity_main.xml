@@ -15,39 +15,4 @@
         android:layout_alignParentStart="true"
         android:layout_marginBottom="180dp" />
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="84dp"
-        android:text="Edit Groups" />
-
-    <Button
-        android:id="@+id/editProfileBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/button"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:onClick="editProfile"
-        android:text="Edit Profile" />
-
-    <Button
-        android:id="@+id/button3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:text="Quit" />
-    <Button android:id="@+id/notify"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Test notify"
-        android:onClick="triggerNotification"
-        android:layout_alignTop="@+id/button3"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
 </RelativeLayout>
