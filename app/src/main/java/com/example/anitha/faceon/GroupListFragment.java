@@ -1,6 +1,7 @@
 package com.example.anitha.faceon;
 
 import android.app.ListFragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,8 +19,6 @@ import java.util.Map;
  */
 public class GroupListFragment extends ListFragment {
 
-    String[] numbers_text = new String[] { "Group A", "Group B", "Group C" };
-    String[] numbers_digits = new String[] { "1", "2", "3" };
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
@@ -29,12 +28,10 @@ public class GroupListFragment extends ListFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-/*        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-                inflater.getContext(), android.R.layout.simple_list_item_1,
-                numbers_text);
-        setListAdapter(adapter);*/
 
-        String[] values = new String[] { "KTH group", "Tennis group" , "Amazing group","Group B"};
+
+
+//        String[] values = new String[] { "KTH group", "Tennis group" , "Amazing group","Group B"};
 
         ArrayList<Map<String, String>> list = buildData();
         String[] from = { "name", "friends" };
@@ -42,6 +39,7 @@ public class GroupListFragment extends ListFragment {
         SimpleAdapter adapter = new SimpleAdapter(getActivity(), list,
                 android.R.layout.simple_list_item_2, from, to);
         setListAdapter(adapter);
+
 
         return super.onCreateView(inflater, container, savedInstanceState);
     }

@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Selfie Challenge</string>
+    <string name="app_name">FaceOn</string>
     <string name="win_con">Congratulations!</string>s
     <string name="win">You\'ve Won!</string>
     <string name="alas">Alas!\n You were to late.</string>
     <string name="loose">You were eliminated.</string>
     <string name="back_button">Back</string>
-    <string name="Challenge">You recived a Challenge!</string>
+    <string name="Challenge">You received a Challenge!</string>
     <string name="selfie_button">Take a selfie</string>
-    <string name="keep">You can still follow\n the group challange</string>
+    <string name="keep">You can still follow\n the group challenge</string>
     <string name="hello_world">Hello World!</string>
     <string name="smear">Smear it in their faces by sending\n your Victory selfie!</string>
     <string name="win_button">In your face!</string>

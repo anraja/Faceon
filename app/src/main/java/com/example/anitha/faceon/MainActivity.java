@@ -1,8 +1,7 @@
 package com.example.anitha.faceon;
 
-import android.app.Activity;
 import android.app.FragmentManager;
-import android.app.ListActivity;
+import android.app.ListFragment;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
@@ -12,12 +11,9 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.SimpleAdapter;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -45,6 +41,7 @@ public class MainActivity extends ActionBarActivity {
 
         if (fm.findFragmentById(android.R.id.content) == null) {
             GroupListFragment list = new GroupListFragment();
+
             fm.beginTransaction().add(android.R.id.content, list).commit();
         }
         mNotifyMgr =
@@ -93,23 +90,12 @@ public class MainActivity extends ActionBarActivity {
         }else if (id == R.id.social_person){
             startActivity(new Intent(this,EditProfileActivity.class));
         }else if (id == R.id.action_group){
-            startActivity(new Intent(this,contacts.class));
+            startActivity(new Intent(this,Contacts.class));
         }
 
         return super.onOptionsItemSelected(item);
     }
-    public void editProfile (View view){
-        Intent  editProfileIntent = new Intent(this, EditProfileActivity.class);
-        startActivity(editProfileIntent);
-    }
 
-    public void editGroups (View view){
-
-        Intent editGroupsIntent = new Intent(this,EditGroupsActivity.class);
-
-
-        startActivity(editGroupsIntent);
-    }
 
     public void win (View view){
         Intent winIntent = new Intent(this,Win.class);

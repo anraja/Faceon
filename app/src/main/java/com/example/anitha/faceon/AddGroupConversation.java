@@ -11,6 +11,9 @@ import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.TreeSet;
+
 
 public class AddGroupConversation extends ActionBarActivity {
 
@@ -44,7 +47,8 @@ public class AddGroupConversation extends ActionBarActivity {
                 Editable groupName = groupNameEditText.getText();
                 if (groupName.length()>0 && groupName.length()<40) {
                     Intent selectFriends = new Intent(this, AddFriends.class);
-                    selectFriends.putExtra(getPackageName(), groupName.toString());
+                    selectFriends.putExtra("groupName", groupName.toString());
+                    selectFriends.putExtra("group", new TreeSet<String>());
                     startActivity(selectFriends);
                     return true;
                 }else if (groupName.length()==0){
@@ -52,10 +56,14 @@ public class AddGroupConversation extends ActionBarActivity {
                 } else if (groupName.length()>=40){
                     Toast.makeText(getApplicationContext(),"Group name is too large",Toast.LENGTH_SHORT).show();
                 }
+
+
                 break;
             case R.id.action_cancelGroupName:
                 NavUtils.navigateUpFromSameTask(this);
                 break;
+
+
         }
 
         return super.onOptionsItemSelected(item);

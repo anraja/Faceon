@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class contacts extends ActionBarActivity {
+public class Contacts extends ActionBarActivity {
     public TextView outputText;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

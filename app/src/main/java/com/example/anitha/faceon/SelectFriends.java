@@ -1,4 +1,5 @@
 package com.example.anitha.faceon;
+import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -31,6 +32,7 @@ public class SelectFriends extends FragmentActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            startActivity(new Intent(this,Contacts.class));
             return true;
         }
 
