@@ -30,5 +30,7 @@
     <string name="title_activity_contacts">contacts</string>
     <string name="action_group">Edit Group</string>
     <string name="action_person">Profile</string>
+    <string name="title_activity_invitation">InvitationActivity</string>
+    <string name="title_activity_challenge_progress">ChallengeProgressActivity</string>
 
 </resources>
