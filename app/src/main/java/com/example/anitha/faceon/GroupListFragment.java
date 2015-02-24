@@ -3,6 +3,7 @@ package com.example.anitha.faceon;
 import android.app.ListFragment;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,10 +20,18 @@ import java.util.Map;
  */
 public class GroupListFragment extends ListFragment {
 
+    int nrOfGroups=0;
 
+    String[] Grp=new String[20];
+    String[] GrpName=new String[20];
+    String Members=new String();
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
-
+        Log.d("Grouplist", "number in list:" + id);
+        Intent intent = new Intent(getActivity() ,ChallengeProgressActivity.class);
+        intent.putExtra("Groupname", GrpName[position]);
+        intent.putExtra("Members",Members);
+        startActivity(intent);
     }
 
     @Override
@@ -31,7 +40,16 @@ public class GroupListFragment extends ListFragment {
 
 
 
-//        String[] values = new String[] { "KTH group", "Tennis group" , "Amazing group","Group B"};
+
+       String bundle = getArguments().getString("groups");
+       String[] GroupList=bundle.split("\n");
+       nrOfGroups=GroupList.length;
+        String[][] content=new String[nrOfGroups][];
+        for(int i=0;i<nrOfGroups;i++){
+            Grp[i]=GroupList[i];
+            Log.d("Testing",GroupList[i]);
+        }
+
 
         ArrayList<Map<String, String>> list = buildData();
         String[] from = { "name", "friends" };
@@ -46,9 +64,16 @@ public class GroupListFragment extends ListFragment {
 
     private ArrayList<Map<String, String>> buildData() {
         ArrayList<Map<String, String>> list = new ArrayList<Map<String, String>>();
-        list.add(putData("Group A", "Anton, Anitha, Karthik"));
+        for(int i=0;i<nrOfGroups;i++){
+            String[] content=Grp[i].split("-");
+            if(content.length<2)break;
+            Members=content[1];
+            GrpName[i]=content[0];
+            list.add(putData(content[0],"Members: "+content[1]));
+        }
+        /*list.add(putData("Group A", "Anton, Anitha, Karthik"));
         list.add(putData("Group B", "Nora, Daniel, Karthik"));
-        list.add(putData("Group N", "Anitha, Daniel, Anton"));
+        list.add(putData("Group N", "Anitha, Daniel, Anton"));*/
         return list;
     }
 

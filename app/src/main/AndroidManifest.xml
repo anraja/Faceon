@@ -77,6 +77,7 @@
             android:label="@string/title_activity_contacts" />
         <activity
             android:name=".ChallengeProgressActivity"
+            android:theme="@style/Theme.AppCompat.Light"
             android:label="@string/title_activity_challenge_progress" >
         </activity>
 

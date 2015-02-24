@@ -3,6 +3,7 @@ package com.example.anitha.faceon;
 import android.media.Image;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -23,6 +24,7 @@ public class ChallengeProgressActivity extends ActionBarActivity {
     private EditText inputTextField;
     private Button sendButton;
     private Button backButton;
+    private int nrOfMembers=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +33,14 @@ public class ChallengeProgressActivity extends ActionBarActivity {
         chatWall = (EditText) findViewById(R.id.viewChatBox);
         chatWall.setKeyListener(null);
 
+        Bundle extras = getIntent().getExtras();
+        String GrpName=extras.getString("Groupname");
+        Log.d("Group", "Started by group" + GrpName);
+        setTitle(GrpName);
+
+        String Members=extras.getString("Members");
+        String[] dividedMembers=Members.split(",");
+        nrOfMembers=dividedMembers.length;
 
         ArrayList<ImageView> membersImages = setupImageArrayList();
         setUpMemberLeftTable(membersImages);
@@ -42,7 +52,7 @@ public class ChallengeProgressActivity extends ActionBarActivity {
      */
     private ArrayList<ImageView> setupImageArrayList (){
         ArrayList<ImageView> membersImages = new ArrayList<>();
-        int membersImagesCount = 10;  // membersImages.size();
+        int membersImagesCount = nrOfMembers;  // membersImages.size();
         for (int i=0 ;i< membersImagesCount;i++){
             ImageView memberPic = new ImageView(this);
             memberPic.setImageResource(R.drawable.anonymous_user);
