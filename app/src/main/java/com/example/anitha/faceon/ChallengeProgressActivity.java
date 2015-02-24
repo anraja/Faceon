@@ -32,10 +32,36 @@ public class ChallengeProgressActivity extends ActionBarActivity {
         chatWall.setKeyListener(null);
 
 
-        ArrayList<ImageView> membersImages = setupImageArrayList();
+        ArrayList<ImageView> membersImages = setupImageArrayListWithCreators();
         setUpMemberLeftTable(membersImages);
     }
-
+    
+    private ArrayList<ImageView> setupImageArrayListWithCreators (){
+        ArrayList<ImageView> membersImages = new ArrayList<>();
+        int membersImagesCount = 10;  // membersImages.size();
+        
+        ImageView memberPic = new ImageView(this);
+        memberPic.setImageResource(R.drawable.anitha);
+        membersImages.add(memberPic);
+        
+        memberPic = new ImageView(this);
+        memberPic.setImageResource(R.drawable.daniel);
+        membersImages.add(memberPic);
+        
+        memberPic = new ImageView(this);
+        memberPic.setImageResource(R.drawable.anton);
+        membersImages.add(memberPic);
+        
+        memberPic = new ImageView(this);
+        memberPic.setImageResource(R.drawable.nora);
+        membersImages.add(memberPic);
+        
+        memberPic = new ImageView(this);
+        memberPic.setImageResource(R.drawable.karthik);
+        membersImages.add(memberPic);
+        
+        return membersImages;
+    }
     /**
      * Setting up a dummy array list for members images
      * @return List <Imageview>
