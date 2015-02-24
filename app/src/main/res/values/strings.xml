@@ -2,8 +2,8 @@
 <resources>
 
     <string name="app_name">FaceOn</string>
-    <string name="win_con">Congratulations!</string>s
-    <string name="win">You\'ve Won!</string>
+    <string name="win_con">Congratulations!</string>
+s    <string name="win">You\'ve Won!</string>
     <string name="alas">Alas!\n You were to late.</string>
     <string name="loose">You were eliminated.</string>
     <string name="back_button">Back</string>
@@ -32,11 +32,10 @@
     <string name="action_person">Profile</string>
     <string name="title_activity_invitation">InvitationActivity</string>
     <string name="title_activity_challenge_progress">ChallengeProgressActivity</string>
-
-
     <string name="username">USERNAME</string>
     <string name="password">PASSWORD</string>
     <string name="message_elipses">Message...</string>
-
+    <string name="title_activity_list_users">ListUsersActivity</string>
+    <string name="action_ok">OK</string>
 
 </resources>

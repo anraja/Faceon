@@ -90,7 +90,7 @@ public class MainActivity extends ActionBarActivity {
         }else if (id == R.id.social_person){
             startActivity(new Intent(this,EditProfileActivity.class));
         }else if (id == R.id.action_group){
-            startActivity(new Intent(this,Contacts.class));
+            startActivity(new Intent(this,ListUsersActivity.class));
         }
 
         return super.onOptionsItemSelected(item);

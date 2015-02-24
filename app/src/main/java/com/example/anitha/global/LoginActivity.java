@@ -31,6 +31,12 @@ public class LoginActivity extends Activity{
         init();
     }
 
+    @Override
+    protected void onDestroy() {
+        stopService(new Intent(this, GameService.class));
+        super.onDestroy();
+    }
+
     private void checkIfUserIsLoggedIn(){
         ParseUser currentUser = ParseUser.getCurrentUser();
         if (currentUser != null) {

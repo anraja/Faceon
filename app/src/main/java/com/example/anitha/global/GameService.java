@@ -4,6 +4,7 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.Binder;
 import android.os.IBinder;
+import android.support.v4.content.LocalBroadcastManager;
 
 import com.parse.ParseUser;
 import com.sinch.android.rtc.ClientRegistration;
@@ -14,6 +15,8 @@ import com.sinch.android.rtc.SinchError;
 import com.sinch.android.rtc.messaging.MessageClient;
 import com.sinch.android.rtc.messaging.MessageClientListener;
 import com.sinch.android.rtc.messaging.WritableMessage;
+
+import java.util.List;
 
 /**
  * Created by Nora on 23-Feb-15.
@@ -28,6 +31,10 @@ public class GameService extends Service implements SinchClientListener {
     private MessageClient gameClient = null;
     private String currentUserId;
 
+    //load spinner
+    private Intent broadcastIntent = new Intent("com.example.anitha.faceon.ListUsersActivity");
+    private LocalBroadcastManager broadcaster;
+
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
@@ -35,9 +42,12 @@ public class GameService extends Service implements SinchClientListener {
         currentUserId = ParseUser.getCurrentUser().getObjectId();
         if (currentUserId != null && !isSinchClientStarted()) {
             startSinchClient(currentUserId);
+            broadcaster = LocalBroadcastManager.getInstance(this);
         }
         return super.onStartCommand(intent, flags, startId);
     }
+
+
     public void startSinchClient(String username) {
         sinchClient = Sinch.getSinchClientBuilder()
                 .context(this)
@@ -65,7 +75,11 @@ public class GameService extends Service implements SinchClientListener {
     }
     @Override
     public void onClientStarted(SinchClient client) {
+        broadcastIntent.putExtra("success", false);
+        broadcaster.sendBroadcast(broadcastIntent);
         client.startListeningOnActiveConnection();
+        broadcastIntent.putExtra("success", true);
+        broadcaster.sendBroadcast(broadcastIntent);
         gameClient = client.getMessageClient();
     }
     @Override
@@ -80,9 +94,13 @@ public class GameService extends Service implements SinchClientListener {
     public IBinder onBind(Intent intent) {
         return serviceInterface;
     }
-    public void sendMessage(String recipientUserId, String textBody) {
+    public void sendMessage(List<String> recipientUserId, String textBody) {
         if (gameClient != null) {
-            WritableMessage message = new WritableMessage(recipientUserId, textBody);
+            // Create a WritableMessage and send to multiple recipients
+            WritableMessage message = new WritableMessage(
+                    recipientUserId,
+                    textBody);
+// Send it
             gameClient.send(message);
         }
     }
@@ -103,7 +121,7 @@ public class GameService extends Service implements SinchClientListener {
     }
     //public interface for ListUsersActivity & MessagingActivity
     public class GameServiceInterface extends Binder {
-        public void sendMessage(String recipientUserId, String textBody) {
+        public void sendMessage(List<String> recipientUserId, String textBody) {
             GameService.this.sendMessage(recipientUserId, textBody);
         }
         public void addMessageClientListener(MessageClientListener listener) {
