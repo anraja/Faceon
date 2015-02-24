@@ -85,8 +85,7 @@ public class LoginActivity extends Activity{
                             startMainActivity();
                         } else {
                             Toast.makeText(getApplicationContext(),
-                                    (CharSequence) e.getCause()
-                                    , Toast.LENGTH_LONG).show();
+                                    (CharSequence)e.getMessage(), Toast.LENGTH_LONG).show();
 
                         }
                     }
