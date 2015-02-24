@@ -7,19 +7,14 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
-import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
-import android.view.Window;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.anitha.faceon.R;
 import com.example.anitha.global.GameService;
 import com.parse.ParseUser;
-import com.parse.codec.binary.StringUtils;
 import com.sinch.android.rtc.PushPair;
 import com.sinch.android.rtc.messaging.Message;
 import com.sinch.android.rtc.messaging.MessageClient;
@@ -33,7 +28,7 @@ import java.util.List;
 /**
  * Created by Nora on 24-Feb-15.
  */
-public class MultiMessagingActivity extends ActionBarActivity {
+public class MultiMessagingActivity extends Activity {
     private List<String> recipientIds;
     private EditText messageBodyField;
     private String messageBody;
@@ -43,21 +38,9 @@ public class MultiMessagingActivity extends ActionBarActivity {
     MyMessageClientListener messageClientListener=new MyMessageClientListener();
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.group_chat, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
-        getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.messaging);
-        getActionBar();
-
-
     bindService(new Intent(this, GameService.class), serviceConnection, BIND_AUTO_CREATE);
     //get recipientId from the intent
     Intent intent = getIntent();
@@ -68,10 +51,7 @@ public class MultiMessagingActivity extends ActionBarActivity {
         else {
             Log.w("LIST","CAUTION%^&^%$$#@$%^&^");
         }
-        String str = concatStringsWSep(recipientIds,", ");
-        //getActionBar().setHomeButtonEnabled(true);
-        //getActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle(str);
+        
     currentUserId = ParseUser.getCurrentUser().getObjectId();
     messageBodyField = (EditText) findViewById(R.id.messageBodyField);
     //listen for a click on the send button
@@ -89,22 +69,7 @@ public class MultiMessagingActivity extends ActionBarActivity {
 
         }
     });
-
-
-
 }
-
-
-    public static String concatStringsWSep(Iterable<String> strings, String separator) {
-        StringBuilder sb = new StringBuilder();
-        String sep = "";
-        for(String s: strings) {
-            sb.append(sep).append(s);
-            sep = separator;
-        }
-        return sb.toString();
-    }
-
     //unbind the service when the activity is destroyed
     @Override
     public void onDestroy() {
@@ -112,10 +77,6 @@ public class MultiMessagingActivity extends ActionBarActivity {
         messageService.removeMessageClientListener(messageClientListener);
         super.onDestroy();
     }
-
-
-
-
 private class MyServiceConnection implements ServiceConnection {
     @Override
     public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
@@ -127,9 +88,6 @@ private class MyServiceConnection implements ServiceConnection {
     public void onServiceDisconnected(ComponentName componentName) {
         messageService = null;
     }
-
-
-
 
 
 }

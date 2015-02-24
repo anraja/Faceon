@@ -14,7 +14,7 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/Theme.AppCompat.Light" >
+        android:theme="@style/CustomTheme" >
         <activity
             android:name="com.example.anitha.global.LoginActivity"
             android:label="@string/app_name"
