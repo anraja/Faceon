@@ -4,16 +4,25 @@ import android.app.FragmentManager;
 import android.app.ListFragment;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.List;
 import java.util.Map;
 
@@ -21,6 +30,8 @@ import java.util.Map;
 public class MainActivity extends ActionBarActivity {
 
     private ArrayAdapter<String> listAdapter;
+    public boolean hasGroups=false;
+    final private String Groups="GROUPS";
 
 
     // Sets an ID for the notification
@@ -29,19 +40,41 @@ public class MainActivity extends ActionBarActivity {
     NotificationManager mNotifyMgr;
     NotificationCompat.Builder mBuilder;
     List<Map<String, String>> list;
+    String groups="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getActionBar();
+        //Is there already a file where group info is saved?
+        if(fileExistance(Groups)){
+            Log.d("MainActivity","GroupExists");
+            hasGroups=true;
+            groups=readFromFile();
+        }
+        else{//otherwise create it!
+            Log.d("MainActivity","Group doesn't Exists");
+            File file = new File(this.getFilesDir(), Groups);
+            String string = "Testgroupname-Anton, Daniel, Elsa\n";
+            FileOutputStream outputStream;
+
+            try {
+                outputStream = openFileOutput(Groups, Context.MODE_PRIVATE);
+                outputStream.write(string.getBytes());
+                outputStream.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
 
         FragmentManager fm = getFragmentManager();
 
-
+        Bundle bundle = new Bundle();
+        bundle.putString("groups", groups);
         if (fm.findFragmentById(android.R.id.content) == null) {
             GroupListFragment list = new GroupListFragment();
-
+            list.setArguments(bundle);//send group info
             fm.beginTransaction().add(android.R.id.content, list).commit();
         }
         mNotifyMgr =
@@ -105,4 +138,38 @@ public class MainActivity extends ActionBarActivity {
     public void triggerNotification (View view){
         mNotifyMgr.notify(mNotificationId, mBuilder.build());
     }
+    public boolean fileExistance(String fname){
+        File file = getBaseContext().getFileStreamPath(fname);
+        return file.exists();
+    }
+    public String readFromFile() {
+
+        String ret = "";
+
+        try {
+            InputStream inputStream = openFileInput(Groups);
+
+            if ( inputStream != null ) {
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+                String receiveString = "";
+                StringBuilder stringBuilder = new StringBuilder();
+
+                while ( (receiveString = bufferedReader.readLine()) != null ) {
+                    stringBuilder.append(receiveString);
+                }
+
+                inputStream.close();
+                ret = stringBuilder.toString();
+            }
+        }
+        catch (FileNotFoundException e) {
+            Log.e("login activity", "File not found: " + e.toString());
+        } catch (IOException e) {
+            Log.e("login activity", "Can not read file: " + e.toString());
+        }
+
+        return ret;
+    }
+
 }

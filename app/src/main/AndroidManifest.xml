@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.anitha.faceon" >
-<<<<<<< HEAD
+
 
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.CAMERA" />
 
     <uses-feature android:name="android.hardware.camera" />
 
-=======
-    
->>>>>>> origin/challengeProgress
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -73,12 +71,10 @@
         <activity
             android:name=".Contacts"
             android:label="@string/title_activity_contacts" />
-        <activity
-            android:name=".InvitationActivity"
-            android:label="@string/title_activity_invitation" >
-        </activity>
+
         <activity
             android:name=".ChallengeProgressActivity"
+            android:theme="@style/Theme.AppCompat.Light"
             android:label="@string/title_activity_challenge_progress" >
         </activity>
     </application>
