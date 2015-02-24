@@ -33,4 +33,10 @@
     <string name="title_activity_invitation">InvitationActivity</string>
     <string name="title_activity_challenge_progress">ChallengeProgressActivity</string>
 
+
+    <string name="username">USERNAME</string>
+    <string name="password">PASSWORD</string>
+    <string name="message_elipses">Message...</string>
+
+
 </resources>
