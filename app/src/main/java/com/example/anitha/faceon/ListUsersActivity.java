@@ -140,7 +140,7 @@ public class ListUsersActivity extends ActionBarActivity {
                 if (e == null) {
                     //start the messaging activity
                     if (!group.contains(user.get(0).getObjectId())) {
-                        group.add(user.get(0).getObjectId());
+                        group.add(user.get(0).getUsername());
                     }
                 } else {
                     Toast.makeText(getApplicationContext(),

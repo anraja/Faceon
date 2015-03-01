@@ -92,7 +92,7 @@
 
         <activity
             android:name=".ListUsersActivity"
-            android:label="@string/title_activity_list_users"
+            android:label="Face on Users"
             android:theme="@style/Theme.AppCompat.Light" >
         </activity>
     </application>

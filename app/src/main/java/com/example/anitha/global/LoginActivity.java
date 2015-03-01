@@ -56,18 +56,23 @@ public class LoginActivity extends Activity{
             public void onClick(View view) {
                 username = usernameField.getText().toString();
                 password = passwordField.getText().toString();
-                ParseUser.logInInBackground(username, password, new LogInCallback() {
-                    public void done(ParseUser user, com.parse.ParseException e) {
-                        if (user != null) {
-                            startAwesomeness();
-                            startMainActivity();
-                        } else {
-                            Toast.makeText(getApplicationContext(),
-                                    "There was an error logging in.",
-                                    Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),
+                        "Attempt to log up....",
+                        Toast.LENGTH_LONG).show();
+                    ParseUser.logInInBackground(username, password, new LogInCallback() {
+                        public void done(ParseUser user, com.parse.ParseException e) {
+                            if (user != null) {
+                                startAwesomeness();
+                                startMainActivity();
+                            } else {
+                                Toast.makeText(getApplicationContext(),
+                                        "There was an error logging in.",
+                                        Toast.LENGTH_LONG).show();
+                            }
                         }
-                    }
-                });
+                    });
+
+
             }
         });
         signUpButton.setOnClickListener(new View.OnClickListener() {
@@ -75,22 +80,32 @@ public class LoginActivity extends Activity{
             public void onClick(View view) {
                 username = usernameField.getText().toString();
                 password = passwordField.getText().toString();
-                ParseUser user = new ParseUser();
-                user.setUsername(username);
-                user.setPassword(password);
-                user.signUpInBackground(new SignUpCallback() {
-                    public void done(com.parse.ParseException e) {
-                        if (e == null) {
-                            startAwesomeness();
-                            startMainActivity();
-                        } else {
-                            Toast.makeText(getApplicationContext(),
-                                    (CharSequence) e.getCause()
-                                    , Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),
+                        "Trying to sign up.",
+                        Toast.LENGTH_LONG).show();
+                if (username.length()>=4 &&password.length()>=4) {
+                    ParseUser user = new ParseUser();
+                    user.setUsername(username);
+                    user.setPassword(password);
+                    user.signUpInBackground(new SignUpCallback() {
+                        public void done(com.parse.ParseException e) {
+                            if (e == null) {
+                                startAwesomeness();
+                                startMainActivity();
+                            } else {
+                                Toast.makeText(getApplicationContext(),
+                                        (CharSequence) e.getCause()
+                                        , Toast.LENGTH_LONG).show();
+
+                            }
 
                         }
-                    }
-                });
+                    });
+                }else{
+                    Toast.makeText(getApplicationContext(),
+                            "Very small username/password.",
+                            Toast.LENGTH_LONG).show();
+                }
             }
         });
     }
