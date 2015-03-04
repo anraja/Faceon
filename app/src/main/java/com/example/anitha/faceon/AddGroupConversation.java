@@ -46,9 +46,9 @@ public class AddGroupConversation extends ActionBarActivity {
                 EditText groupNameEditText = (EditText) findViewById(R.id.groupNameEditText);
                 Editable groupName = groupNameEditText.getText();
                 if (groupName.length()>0 && groupName.length()<40) {
-                    Intent selectFriends = new Intent(this, AddFriends.class);
+                    Intent selectFriends = new Intent(this, ListUsersActivity.class);
                     selectFriends.putExtra("groupName", groupName.toString());
-                    selectFriends.putExtra("group", new TreeSet<String>());
+                    //selectFriends.putExtra("group", new TreeSet<String>());
                     startActivity(selectFriends);
                     return true;
                 }else if (groupName.length()==0){

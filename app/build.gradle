@@ -24,6 +24,8 @@ dependencies {
     compile 'com.android.support:appcompat-v7:21.0.3'
     compile files('/Users/saravana/AndroidStudioProjects/Faceon/libs/sinch-android-rtc-3.4.3.jar')
     compile files('/Users/saravana/AndroidStudioProjects/Faceon/libs/Parse-1.8.2.jar')
+    compile files('C:/Users/Nora/Documents/GitHub/Faceon/libs/Parse-1.8.2.jar')
+    compile files('C:/Users/Nora/Documents/GitHub/Faceon/libs/sinch-android-rtc-3.4.3.jar')
 }
 
 dependencies {

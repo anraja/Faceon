@@ -16,6 +16,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 
+import com.parse.FindCallback;
+import com.parse.GetCallback;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
+import com.parse.ParseUser;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -23,6 +33,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -31,8 +42,8 @@ public class MainActivity extends ActionBarActivity {
 
     private ArrayAdapter<String> listAdapter;
     public boolean hasGroups=false;
-    final private String Groups="GROUPS";
-
+    //final private String Groups="GROUPS";
+    ArrayList<String> groupsList;
 
     // Sets an ID for the notification
     int mNotificationId = 001;
@@ -48,7 +59,7 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
         getActionBar();
         //Is there already a file where group info is saved?
-        if(fileExistance(Groups)){
+       /* if(fileExistance(Groups)){
             Log.d("MainActivity","GroupExists");
             hasGroups=true;
             groups=readFromFile();
@@ -66,12 +77,29 @@ public class MainActivity extends ActionBarActivity {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }
+        }*/
+
+/*        ParseQuery<ParseObject> query = ParseQuery.getQuery("UserGroup");
+        query.findInBackground(new FindCallback<ParseObject>() {
+            @Override
+            public void done(List<ParseObject> parseObjects, ParseException e) {
+                if (e==null) {
+                    for (ParseObject o : parseObjects) {
+                        JSONArray members = o.getJSONArray("member");
+
+                        List<String> l = convertToList(members);
+                        if (l.contains(ParseUser.getCurrentUser().getObjectId())){
+                            groupsList.add((String) o.get("name"));
+                        }
+                    }
+                }
+            }
+        });*/
 
         FragmentManager fm = getFragmentManager();
 
         Bundle bundle = new Bundle();
-        bundle.putString("groups", groups);
+        bundle.putStringArrayList("group", groupsList);
         if (fm.findFragmentById(android.R.id.content) == null) {
             GroupListFragment list = new GroupListFragment();
             list.setArguments(bundle);//send group info
@@ -98,6 +126,22 @@ public class MainActivity extends ActionBarActivity {
                         PendingIntent.FLAG_UPDATE_CURRENT
                 );
         mBuilder.setContentIntent(resultPendingIntent);
+    }
+
+
+    private List<String> convertToList(JSONArray arr){
+        ArrayList<String> list = new ArrayList<String>();
+        if (arr != null) {
+            int len = arr.length();
+            for (int i=0;i<len;i++){
+                try {
+                    list.add(arr.get(i).toString());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return list;
     }
 
 
@@ -138,7 +182,7 @@ public class MainActivity extends ActionBarActivity {
     public void triggerNotification (View view){
         mNotifyMgr.notify(mNotificationId, mBuilder.build());
     }
-    public boolean fileExistance(String fname){
+    /*public boolean fileExistance(String fname){
         File file = getBaseContext().getFileStreamPath(fname);
         return file.exists();
     }
@@ -170,6 +214,6 @@ public class MainActivity extends ActionBarActivity {
         }
 
         return ret;
-    }
+    }*/
 
 }

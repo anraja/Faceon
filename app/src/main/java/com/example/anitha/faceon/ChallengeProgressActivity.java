@@ -34,11 +34,11 @@ public class ChallengeProgressActivity extends ActionBarActivity {
         chatWall.setKeyListener(null);
 
         Bundle extras = getIntent().getExtras();
-        String GrpName=extras.getString("Groupname");
+        String GrpName=extras.getString("group");
         Log.d("Group", "Started by group" + GrpName);
         setTitle(GrpName);
 
-        String Members=extras.getString("Members");
+        String Members=extras.getString("members");
         String[] dividedMembers=Members.split(",");
         nrOfMembers=dividedMembers.length;
 

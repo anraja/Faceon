@@ -21,7 +21,9 @@ import android.widget.Toast;
 import com.example.anitha.communicate.MultiMessagingActivity;
 import com.parse.FindCallback;
 import com.parse.ParseException;
+import com.parse.ParseObject;
 import com.parse.ParseQuery;
+import com.parse.ParseRelation;
 import com.parse.ParseUser;
 
 import java.util.ArrayList;
@@ -38,12 +40,17 @@ public class ListUsersActivity extends ActionBarActivity {
     ProgressDialog progressDialog;
     BroadcastReceiver receiver;
 
-    List<String> group=new ArrayList<>();
+    List<ParseUser> users= new ArrayList<ParseUser>();
+    String groupName;
+
+    //List<String> group=new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_users);
+        Intent intent = getIntent();
+        groupName = intent.getStringExtra("groupName");
         showSpinneraki();
         showUserList();
     }
@@ -59,7 +66,7 @@ public class ListUsersActivity extends ActionBarActivity {
             @Override
             public void onReceive(Context context, Intent intent) {
                 Boolean success = intent.getBooleanExtra("success", false);
-                progressDialog.dismiss();
+
                 //show a toast message if the Sinch
                 //service failed to start
                 if (!success) {
@@ -67,6 +74,7 @@ public class ListUsersActivity extends ActionBarActivity {
                 }
             }
         };
+        progressDialog.dismiss();
         LocalBroadcastManager.getInstance(this).registerReceiver(receiver, new IntentFilter("com.example.anitha.faceon.listusersactivity"));
     }
 
@@ -120,14 +128,39 @@ public class ListUsersActivity extends ActionBarActivity {
         if (id == R.id.action_settings) {
             return true;
         }else if (id==R.id.action_done){
-            Intent intent = new Intent(getApplicationContext(), MultiMessagingActivity.class);
-            Log.i("dat","group size is:" +group.size());
+            storeGroup();
+            //Intent intent = new Intent(getApplicationContext(), MultiMessagingActivity.class);
+           // Log.i("dat","group size is:" +group.size());
            // intent.putExtra("RECIPIENTS_ID", group.toArray());
-            intent.putStringArrayListExtra("users", (ArrayList<String>) group);
+            //intent.putStringArrayListExtra("users", (ArrayList<String>) group);
+            //startActivity(intent);
+
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            //intent.putExtra("RECIPIENT_ID", user.get(0).getObjectId());
             startActivity(intent);
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void storeGroup(){
+        if (users!=null && users.size()>0){
+            ParseObject appGroup = new ParseObject("UserGroup");
+            appGroup.put("name",groupName);
+            users.add(ParseUser.getCurrentUser());
+            ParseRelation<ParseObject> relation = appGroup.getRelation("member");
+
+
+            Log.w("#NUBER","Number of users in the list: "+users.size());
+            for (ParseUser u:users) {
+                relation.add(u);
+                //appGroup.put("member", u);
+            }
+//                gameScore.put("playerName", "Sean Plott");
+//                gameScore.put("cheatMode", false);
+         //user.saveInBackground();
+            appGroup.saveInBackground();
+        }
     }
 
 
@@ -138,10 +171,12 @@ public class ListUsersActivity extends ActionBarActivity {
         query.findInBackground(new FindCallback<ParseUser>() {
             public void done(List<ParseUser> user, ParseException e) {
                 if (e == null) {
+                    users.add((ParseUser) user.get(0));
                     //start the messaging activity
-                    if (!group.contains(user.get(0).getObjectId())) {
-                        group.add(user.get(0).getObjectId());
-                    }
+//                    Intent intent = new Intent(getApplicationContext(), MultiMessagingActivity.class);
+//                    intent.putExtra("RECIPIENT_ID", user.get(0));
+//                    intent.putp
+                    //startActivity(intent);
                 } else {
                     Toast.makeText(getApplicationContext(),
                             "Error finding that user",
