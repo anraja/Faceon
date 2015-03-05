@@ -26,8 +26,9 @@ public class Notification extends ActionBarActivity {
         selfie_button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent takeSelfie = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivity(takeSelfie);
                 Log.d("Win", "Clicked to send selfie");
+                startActivity(takeSelfie);
+
             }
         });
 

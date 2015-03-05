@@ -94,7 +94,7 @@ public class GameService extends Service implements SinchClientListener {
     public IBinder onBind(Intent intent) {
         return serviceInterface;
     }
-    public void sendMessage(String recipientUserId, String textBody) {
+    public void sendMessage(List<String> recipientUserId, String textBody) {
         if (gameClient != null) {
             // Create a WritableMessage and send to multiple recipients
             WritableMessage message = new WritableMessage(
@@ -121,7 +121,7 @@ public class GameService extends Service implements SinchClientListener {
     }
     //public interface for ListUsersActivity & MessagingActivity
     public class GameServiceInterface extends Binder {
-        public void sendMessage(String recipientUserId, String textBody) {
+        public void sendMessage(List<String> recipientUserId, String textBody) {
             GameService.this.sendMessage(recipientUserId, textBody);
         }
         public void addMessageClientListener(MessageClientListener listener) {

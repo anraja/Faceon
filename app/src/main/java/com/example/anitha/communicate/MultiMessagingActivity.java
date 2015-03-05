@@ -5,8 +5,10 @@ import android.app.Service;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.provider.MediaStore;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -14,6 +16,7 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -49,6 +52,11 @@ public class MultiMessagingActivity extends ActionBarActivity {
     ListView messagesList;
     MessageAdapter messageAdapter;
     String recipientId;
+    String groupName;
+
+    static final int REQUEST_IMAGE_CAPTURE = 1;
+
+    private ImageView mImageView;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -64,8 +72,9 @@ public class MultiMessagingActivity extends ActionBarActivity {
 
         setContentView(R.layout.messaging);
         getActionBar();
-
-        getSupportActionBar().setTitle(recipientId);
+        Intent intent = getIntent();
+        groupName = intent.getStringExtra("group");
+        getSupportActionBar().setTitle(groupName);
         currentUserId = ParseUser.getCurrentUser().getObjectId();
         messageBodyField = (EditText) findViewById(R.id.messageBodyField);
         //listen for a click on the send button
@@ -73,20 +82,23 @@ public class MultiMessagingActivity extends ActionBarActivity {
             @Override
             public void onClick(View view) {
                 //send the message!
-                messageBody = messageBodyField.getText().toString();
+                Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+                    startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+                }
+/*                messageBody = messageBodyField.getText().toString();
                 if (messageBody.isEmpty()) {
                     Toast.makeText(getApplicationContext(), "Please enter a message", Toast.LENGTH_LONG).show();
                     return;
                 }
                 messageService.sendMessage(recipientId, messageBody);
-                messageBodyField.setText("");
+                messageBodyField.setText("");*/
 
             }
         });
         bindService(new Intent(this, GameService.class), serviceConnection, BIND_AUTO_CREATE);
         //get recipientId from the intent
-        Intent intent = getIntent();
-        recipientId = intent.getStringExtra("group");
+
 
         messagesList = (ListView) findViewById(R.id.listMessages);
         messageAdapter = new MessageAdapter(this);
@@ -111,20 +123,27 @@ public class MultiMessagingActivity extends ActionBarActivity {
                 }
             }
         });
-
-/*        if (recipientId.size() > 0) {
-            Log.w("LIST", "RECEIVED SIZE: " + recipientIds.size());
-        } else {
-            Log.w("LIST", "CAUTION%^&^%$$#@$%^&^");
-        }*/
-        //String str = concatStringsWSep(recipientIds, ", ");
-        //getActionBar().setHomeButtonEnabled(true);
-        //getActionBar().setDisplayHomeAsUpEnabled(true);
-
-
-
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            Bundle extras = data.getExtras();
+            Bitmap imageBitmap = (Bitmap) extras.get("data");
+            Log.d("IMAGE","#####3IMAGETAKEN******");
+            createParseImage(imageBitmap);
+            messageService.sendMessage(recipientIds, messageBody);
+            messageBodyField.setText("");
+           // mImageView.setImageBitmap(imageBitmap);
+        }
+    }
+
+    private void createParseImage(Bitmap image){
+        ParseObject selfie = new ParseObject("Selfie");
+/*        selfie.put("by", ParseUser.getCurrentUser());
+        selfie.put();*/
+        selfie.saveInBackground();
+    }
 
     public static String concatStringsWSep(Iterable<String> strings, String separator) {
         StringBuilder sb = new StringBuilder();

@@ -5,6 +5,8 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.ActionBarActivity;
@@ -21,11 +23,13 @@ import android.widget.Toast;
 import com.example.anitha.communicate.MultiMessagingActivity;
 import com.parse.FindCallback;
 import com.parse.ParseException;
+import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseRelation;
 import com.parse.ParseUser;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -66,9 +70,6 @@ public class ListUsersActivity extends ActionBarActivity {
             @Override
             public void onReceive(Context context, Intent intent) {
                 Boolean success = intent.getBooleanExtra("success", false);
-
-                //show a toast message if the Sinch
-                //service failed to start
                 if (!success) {
                     Toast.makeText(getApplicationContext(), "Messaging service failed to start", Toast.LENGTH_LONG).show();
                 }
@@ -128,41 +129,54 @@ public class ListUsersActivity extends ActionBarActivity {
         if (id == R.id.action_settings) {
             return true;
         }else if (id==R.id.action_done){
-            storeGroup();
-            //Intent intent = new Intent(getApplicationContext(), MultiMessagingActivity.class);
-           // Log.i("dat","group size is:" +group.size());
-           // intent.putExtra("RECIPIENTS_ID", group.toArray());
-            //intent.putStringArrayListExtra("users", (ArrayList<String>) group);
-            //startActivity(intent);
-
+            try {
+                storeGroup();
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-            //intent.putExtra("RECIPIENT_ID", user.get(0).getObjectId());
             startActivity(intent);
         }
 
         return super.onOptionsItemSelected(item);
     }
 
-    private void storeGroup(){
+    private void storeGroup() throws ParseException {
         if (users!=null && users.size()>0){
             ParseObject appGroup = new ParseObject("UserGroup");
             appGroup.put("name",groupName);
             users.add(ParseUser.getCurrentUser());
             ParseRelation<ParseObject> relation = appGroup.getRelation("member");
-
-
-            Log.w("#NUBER","Number of users in the list: "+users.size());
+            ParseRelation<ParseObject> selfieRelation = appGroup.getRelation("selfie");
+            ParseObject defaultSelfie = getByteDefaultImage();
             for (ParseUser u:users) {
                 relation.add(u);
-                //appGroup.put("member", u);
+                defaultSelfie.put("user",u.getObjectId());
+                defaultSelfie.save();
+                selfieRelation.add(defaultSelfie);
             }
-//                gameScore.put("playerName", "Sean Plott");
-//                gameScore.put("cheatMode", false);
-         //user.saveInBackground();
+
             appGroup.saveInBackground();
         }
     }
 
+    private ParseObject getByteDefaultImage(){
+        Bitmap bm = BitmapFactory.decodeResource(getResources(), R.drawable.anonymous_user);
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bm.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        byte[] byteArray = stream.toByteArray();
+        ParseFile file = new ParseFile("selfieImg", byteArray);
+        try {
+            file.save();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        ParseObject selfie = new ParseObject("selfie");
+        selfie.put("img",file);
+
+        selfie.saveInBackground();
+        return selfie;
+    }
 
     //open a conversation when the user clicks on another user name
     public void addToGroupChat(ArrayList<String> names, int pos) {
@@ -172,11 +186,6 @@ public class ListUsersActivity extends ActionBarActivity {
             public void done(List<ParseUser> user, ParseException e) {
                 if (e == null) {
                     users.add((ParseUser) user.get(0));
-                    //start the messaging activity
-//                    Intent intent = new Intent(getApplicationContext(), MultiMessagingActivity.class);
-//                    intent.putExtra("RECIPIENT_ID", user.get(0));
-//                    intent.putp
-                    //startActivity(intent);
                 } else {
                     Toast.makeText(getApplicationContext(),
                             "Error finding that user",
